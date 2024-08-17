@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Castalk Note</string>
+    <string name="title_create_new_note">Create new note…</string>
+    <string name="title_you_have_no_note">You have no note</string>
+    <string name="title_title">Title</string>
+    <string name="title_content">Content</string>
 </resources>

@@ -14,23 +14,28 @@ class NoteRepository @Inject constructor(private val noteDAO: NoteDAO) {
         }
     }
 
-    suspend fun addNewNote(note: NoteLocalModel) {
-        withContext(Dispatchers.IO) {
-            noteDAO.insert(note)
+    suspend fun getNoteByID(id: Int): NoteLocalModel {
+        return withContext(Dispatchers.IO) {
+            noteDAO.getNoteByID(id)
         }
     }
 
-    suspend fun updateNote(note: NoteLocalModel) {
-        withContext(Dispatchers.IO) {
-            note.apply {
-                noteDAO.updateNote(noteId, noteName, noteContent)
-            }
+    suspend fun addNewNote(note: NoteLocalModel): NoteLocalModel? {
+        return withContext(Dispatchers.IO) {
+            noteDAO.insertAndGetNote(note)
         }
     }
 
-    suspend fun deleteNote(id: Int) {
-        withContext(Dispatchers.IO) {
-            noteDAO.delete(id)
+    suspend fun updateNote(note: NoteLocalModel): Boolean {
+        return withContext(Dispatchers.IO) {
+            // > 0 means update successfully
+            noteDAO.updateNote(note.noteId, note.noteName, note.noteContent) > 0
+        }
+    }
+
+    suspend fun deleteNote(note: NoteLocalModel): Boolean {
+        return withContext(Dispatchers.IO) {
+            noteDAO.deleteNote(note) > 0
         }
     }
 }
