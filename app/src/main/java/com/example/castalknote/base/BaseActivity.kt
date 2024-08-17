@@ -20,7 +20,7 @@ abstract class BaseActivity<VB : ViewBinding>(val bindingFactory: (LayoutInflate
     override fun addFragment(fragment: Fragment?) {
         fragment?.let {
             supportFragmentManager.beginTransaction().apply {
-                add(containerID, it)
+                replace(containerID, it)
                 addToBackStack(fragment::class.java.name)
                 commit()
             }
