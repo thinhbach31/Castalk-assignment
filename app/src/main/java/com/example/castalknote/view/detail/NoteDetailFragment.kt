@@ -38,9 +38,9 @@ class NoteDetailFragment() :
             binding.buttonRemove.apply {
                 if (it) show() else hide()
             }
-            viewModel.isDeleted.observe(this) {
-                if (it) activity?.onBackPressedDispatcher?.onBackPressed()
-            }
+        }
+        viewModel.isDeleted.observe(this) {
+            if (it) activity?.onBackPressedDispatcher?.onBackPressed()
         }
     }
 
@@ -103,7 +103,7 @@ class NoteDetailFragment() :
     private fun saveNote() {
         savingJob?.cancel()
         savingJob = lifecycleScope.launch {
-            delay(1000L)
+            delay(Const.AUTO_SAVE_DURATION)
             viewModel.saveNote()
         }
     }
