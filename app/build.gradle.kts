@@ -68,6 +68,9 @@ dependencies {
     implementation(libs.room)
     kapt(libs.room.compiler)
 
+    // unit test
+    androidTestImplementation(libs.core.testing)
+    androidTestImplementation(libs.room.testing)
 }
 
 hilt {
